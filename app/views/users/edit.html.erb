@@ -1,0 +1,19 @@
+<div>
+  <p>UserID: <%= @user.id %></p>
+  <p>Email address: <%= @user.email %></p>
+  <p>Username: <%= @user.username %></p>
+  <%= form_with model: @user do |f| %>
+    <p><%= f.label :name, "First name" %></p>
+    <p><%= f.text_field :name %></p>
+    <p><%= f.label :lastname, "Last name" %></p>
+    <p><%= f.text_field :lastname %></p>
+    <p><%= f.label :age, "Age" %></p>
+    <p><%= f.text_field :age %></p>
+    <p><%= f.label :description, "Description" %></p>
+    <p><%= f.text_area :description %></p>
+    <p><%= f.submit "Save" %></p>
+  <% end %>
+  <% if @user.avatar.present? %>
+    <img src="<%= @user.avatar %>" alt="Avatar">
+  <% end %>
+</div>

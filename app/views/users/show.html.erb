@@ -1,0 +1,22 @@
+<div>
+  <p>UserID: <%= @user.id %></p>
+  <p>Full name: <%= "#{@user.name} #{@user.lastname}" %></p>
+  <p>Email address: <%= @user.email %></p>
+  <p>Username: <%= @user.username %></p>
+  <p>Age: <%= @user.age %></p>
+  <% if @user.avatar.present? %>
+    <img src="<%= @user.avatar %>" alt="Avatar">
+  <% end %>
+</div>
+<div>
+  <% if @user.id > User.first.id %>
+    <%= link_to "Предыдущий пользователь", user_path(@user.id - 1) %>
+  <% end %>
+  <% if User.exists?(@user.id + 1) %>
+    <%= link_to "Следующий пользователь", user_path(@user.id + 1) %>
+  <% end %>
+  <p><%= link_to "Всё пользователи", users_path %></p>
+  <% if @user.id == current_user.id || current_user.has_role?(:admin) %>
+    <p><%= link_to "Редактровать профиль", edit_user_path(@user.id) %></p>
+  <% end %>
+</div>

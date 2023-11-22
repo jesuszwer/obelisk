@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Obelisk</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+  <body>
+    <div class="container">
+      <nav class="nav">
+        <p class="nav-item"><%= link_to "Домой", root_path %></p>
+        <p class="nav-item"><%= link_to "Пользователи", users_path %></p>
+      </nav>
+      <% if signed_in? %>
+        <img src="<%= current_user.avatar %>" alt="" width="64" height="64">
+        <%= link_to current_user.username, user_path(current_user) %>
+        <%= button_to "Выход", sign_out_path, method: :delete %>
+      <% else %>
+        <%= link_to "Вход", sign_in_path %>
+        <%= link_to "Регистрация", sign_up_path %>
+      <% end %>
+      <%= yield %>
+    </div>
+  </body>
+</html>
