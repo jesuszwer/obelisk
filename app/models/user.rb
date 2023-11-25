@@ -3,10 +3,10 @@ class User < ApplicationRecord
   include Clearance::User
   after_create :assign_default_role
 
-  # validates :name, presence: true
-  # validates :lastname, presence: true
-  # validates :email, presence: true, uniqueness: true
-  # validates :age, numericality: { greater_than: 0, less_than: 150 }, allow_blank: true
+  validates :email, presence: true, format: { with: URI::MailTo::EMAIL_REGEXP }
+  validates :password, presence: true, length: { minimum: 6 }
+  validates :username, presence: true, uniqueness: true
+
 
   private
 

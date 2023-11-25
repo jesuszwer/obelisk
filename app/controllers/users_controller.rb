@@ -20,8 +20,10 @@ class UsersController < Clearance::UsersController
     @user = user_from_params
     if @user.save
       sign_in @user
-      redirect_back_or url_after_create
+      redirect_back_or edit_user_url(@user), notice: "Welcome! You have signed up successfully. "
     else
+      error_messages = @user.errors.full_messages.join(". ")
+      flash.now.alert = error_messages
       render template: "users/new", status: :unprocessable_entity
     end
   end
@@ -59,7 +61,6 @@ class UsersController < Clearance::UsersController
 
   def require_authenticated_user
     unless signed_in?
-      Rails.logger.debug("User is not signed in")
       redirect_to sign_in_url, notice: "Please sign in to access this page."
     end
   end

@@ -10,7 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_22_155106) do
+ActiveRecord::Schema[7.1].define(version: 2023_11_24_092643) do
+  create_table "comments", force: :cascade do |t|
+    t.string "sender_id"
+    t.string "body"
+    t.integer "post_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["post_id"], name: "index_comments_on_post_id"
+  end
+
+  create_table "posts", force: :cascade do |t|
+    t.string "title", null: false
+    t.integer "creater_id", null: false
+    t.text "body", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["creater_id"], name: "index_posts_on_creater_id"
+  end
+
   create_table "roles", force: :cascade do |t|
     t.string "name"
     t.string "resource_type"
@@ -49,4 +67,5 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_22_155106) do
     t.index ["user_id"], name: "index_users_roles_on_user_id"
   end
 
+  add_foreign_key "comments", "posts"
 end

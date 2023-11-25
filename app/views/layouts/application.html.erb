@@ -13,6 +13,7 @@
       <nav class="nav">
         <p class="nav-item"><%= link_to "Домой", root_path %></p>
         <p class="nav-item"><%= link_to "Пользователи", users_path %></p>
+        <p class="nav-item"><%= link_to "Посты", posts_path %></p>
       </nav>
       <% if signed_in? %>
         <img src="<%= current_user.avatar %>" alt="" width="64" height="64">
@@ -21,6 +22,15 @@
       <% else %>
         <%= link_to "Вход", sign_in_path %>
         <%= link_to "Регистрация", sign_up_path %>
+      <% end %>
+      <% if flash.any? %>
+        <div class="flash">
+          <% flash.each do |key, value| %>
+            <div class="flash-<%= key %>">
+              <%= value %>
+            </div>
+          <% end %>
+        </div>
       <% end %>
       <%= yield %>
     </div>

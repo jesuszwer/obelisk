@@ -1,0 +1,5 @@
+<h2>Добавить комментарии</h2>
+<%= form_with model: @comment, url: post_comments_path(@post), method: :post do |f| %>
+  <%= f.text_area :body %>
+  <%= f.submit %>
+<% end %>

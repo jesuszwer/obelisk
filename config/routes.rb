@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
 
+  root to: "welcome#index"
 
-  # Clearance routes start
+  #! Clearance routes start
   # Routes for gem Clearance which is responsible for user authentication
 
   # Routes for password reset
@@ -28,6 +29,11 @@ Rails.application.routes.draw do
 
   # Clearance routes end
 
-  root to: "welcome#index"
+  #! Blog routes
+  resources :posts, only: [:index,:new,:create,:show], controller: "blog/posts" do
+    resources :comments, only: [:index,:new, :create], controller: "blog/comments"
+  end
+
+
 
 end

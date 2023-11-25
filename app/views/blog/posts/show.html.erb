@@ -1,0 +1,5 @@
+<h2><%= @post.title %></h2>
+<p><%= @post.body %></p>
+<p>Posted on <%= link_to @creater.username, user_path(@creater) %></p>
+<%= render partial: 'blog/comments/comment', locals: { comments: @comments } %>
+<%= render partial: 'blog/comments/form', locals: { comments: @comments } %>
